@@ -1,6 +1,5 @@
 package com.striker.CamRentalsSpring.repository;
 
-import com.striker.CamRentalsSpring.modal.Roles;
 import com.striker.CamRentalsSpring.modal.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

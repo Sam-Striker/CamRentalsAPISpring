@@ -2,7 +2,6 @@ package com.striker.CamRentalsSpring.service;
 
 import com.striker.CamRentalsSpring.DTO.LoginDTO;
 import com.striker.CamRentalsSpring.Response.LoginResponse;
-import com.striker.CamRentalsSpring.modal.Roles;
 import com.striker.CamRentalsSpring.modal.Users;
 
 import java.util.List;

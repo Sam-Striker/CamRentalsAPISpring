@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Data
 @Entity
 public class Users {
     @Id
@@ -21,10 +22,7 @@ public class Users {
     private String address;
     private String phone_nbr;
     private LocalDate date;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    @JsonBackReference
-    private Roles role;
+    private String role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     @JsonManagedReference
     private List<Camera> cameras;
@@ -36,17 +34,6 @@ public class Users {
     public Users() {
     }
 
-    public Users(int id, String nationalID, String username, String password, String address, String phone_nbr, LocalDate date, Roles role, List<Camera> cameras) {
-        this.id = id;
-        this.nationalID = nationalID;
-        this.username = username;
-        this.password = password;
-        this.address = address;
-        this.phone_nbr = phone_nbr;
-        this.date = date;
-        this.role = role;
-        this.cameras = cameras;
-    }
 
 
 
