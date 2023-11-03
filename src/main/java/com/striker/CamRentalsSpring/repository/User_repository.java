@@ -11,6 +11,7 @@ public interface User_repository extends JpaRepository<Users, Integer> {
 
     Optional<Users> findByNationalIDAndPassword(String nationalID, String Password);
     Users findByNationalID(String nationalID);
+    boolean existsByNationalID(String nationalID);
 
 //    Roles findRoleByName(String roleName);
 //    Users getUserByNationalID(String nationalID);

@@ -1,8 +1,8 @@
 package com.striker.CamRentalsSpring.controller;
 
 import com.striker.CamRentalsSpring.DTO.LoginDTO;
-import com.striker.CamRentalsSpring.Response.LoginResponse;
-import com.striker.CamRentalsSpring.modal.Camera;
+import com.striker.CamRentalsSpring.DTO.UserDTO;
+import com.striker.CamRentalsSpring.Response.Response;
 import com.striker.CamRentalsSpring.modal.Users;
 import com.striker.CamRentalsSpring.service.UserImply;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,15 @@ public class User_controller {
     }
 
     @PostMapping("/save")
-    public Users createAccount(@RequestBody Users account) {
-        return user_service. createAccount(account);
+    public ResponseEntity<?>  createAccount(@RequestBody UserDTO serDTO) {
+        Response loginResponse = user_service. createAccount(serDTO);
+        return ResponseEntity.ok(loginResponse);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO){
-        LoginResponse loginResponse = user_service.loginUser(loginDTO);
+        Response loginResponse = user_service.loginUser(loginDTO);
         return ResponseEntity.ok(loginResponse);
     }
 

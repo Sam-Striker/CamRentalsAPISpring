@@ -7,7 +7,8 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
-public class LoginResponse {
+public class Response {
     String message;
-    String status;
+    Boolean status;
+    String role;
 }

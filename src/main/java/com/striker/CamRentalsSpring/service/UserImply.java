@@ -1,11 +1,13 @@
 package com.striker.CamRentalsSpring.service;
 import com.striker.CamRentalsSpring.DTO.LoginDTO;
-import com.striker.CamRentalsSpring.Response.LoginResponse;
+import com.striker.CamRentalsSpring.DTO.UserDTO;
+import com.striker.CamRentalsSpring.Response.Response;
 import com.striker.CamRentalsSpring.modal.Users;
 import com.striker.CamRentalsSpring.repository.User_repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 import java.util.List;
 
@@ -23,14 +25,45 @@ public class UserImply implements UserInterf{
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Users createAccount(Users account) {
-        String hashedPassword = passwordEncoder.encode(account.getPassword());
-        account.setPassword(hashedPassword);
-        return user_repo.save(account);
+    public Response createAccount(UserDTO userDTO) {
+        if (userDTO.getNationalID() == null || userDTO.getUsername() == null ||
+                userDTO.getPassword() == null || userDTO.getAddress() == null ||
+                userDTO.getPhone_nbr() == null) {
+            return new Response("All fields must be provided", false, "");
+        }
+        if (user_repo.existsByNationalID(userDTO.getNationalID())) {
+            return new Response("National ID already exists", false, "");
+        }
+
+        if (!userDTO.getNationalID().matches("\\d+")) {
+            return new Response("National ID must contain only numbers", false, "");
+        }
+
+        if (!userDTO.getPhone_nbr().matches("\\d+")) {
+            return new Response("Phone number must contain only numbers", false, "");
+        }
+
+        Users user = new Users();
+        user.setNationalID(userDTO.getNationalID());
+        user.setUsername(userDTO.getUsername());
+
+        String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
+        user.setPassword(hashedPassword);
+
+        user.setAddress(userDTO.getAddress());
+        user.setPhone_nbr(userDTO.getPhone_nbr());
+        user.setDate(userDTO.getDate());
+        user.setRole(userDTO.getRole());
+
+        Users savedUser = user_repo.save(user);
+        String role = savedUser.getRole();
+
+        return new Response("User created successfully" , true, role);
+
     }
 
     @Override
-    public LoginResponse loginUser(LoginDTO loginDTO) {
+    public Response loginUser(LoginDTO loginDTO) {
         Users user1 = user_repo.findByNationalID(loginDTO.getNationalID());
         if(user1 != null){
             String password = loginDTO.getPassword();
@@ -39,15 +72,16 @@ public class UserImply implements UserInterf{
             if (isPwdRight){
                 Optional<Users> user = user_repo.findByNationalIDAndPassword(loginDTO.getNationalID(), encodePassword);
                 if(user.isPresent()) {
-                    return new LoginResponse("login successfully", "true");
+                    String role = user1.getRole();
+                    return new Response("login successfully as " + role, true, role);
                 }else {
-                    return new LoginResponse("login failed", "false");
+                    return new Response("login failed", false, "");
                 }
             } else {
-                return new LoginResponse("password not match", "false");
+                return new Response("password not match", false, "");
             }
         } else {
-            return new LoginResponse("National Id Doesn't exist", "false");
+            return new Response("National Id Doesn't exist", false, "");
         }
     }
 
