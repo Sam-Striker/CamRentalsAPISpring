@@ -34,6 +34,11 @@ public class Cam_controller {
         return cam_service.findCam(serialNbr);
     }
 
+    @PutMapping("/update")
+    public Camera update_Cam(@RequestBody Camera st) {
+        return cam_service.update_Cam(st);
+    }
+
     @PutMapping("/updateCamStatus")
     public String updateCameraStatus(@RequestBody Camera updatedCamera) {
         int id = updatedCamera.getId();

@@ -20,4 +20,5 @@ public interface Cam_repository extends JpaRepository<Camera, Integer> {
     @Query("UPDATE Camera c SET c.rentStatus = :newRentStatus WHERE c.id = :id")
     @Transactional
     void updateRentStatus(@Param("id") Integer id, @Param("newRentStatus") String newRentStatus);
+
 }
