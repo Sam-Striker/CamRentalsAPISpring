@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.List;
 @Repository
 public interface Cam_repository extends JpaRepository<Camera, Integer> {
     Camera findByserialNbr(String serialNbr);
@@ -20,5 +20,8 @@ public interface Cam_repository extends JpaRepository<Camera, Integer> {
     @Query("UPDATE Camera c SET c.rentStatus = :newRentStatus WHERE c.id = :id")
     @Transactional
     void updateRentStatus(@Param("id") Integer id, @Param("newRentStatus") String newRentStatus);
+
+    @Query("SELECT c FROM Camera c LEFT JOIN FETCH c.user")
+    List<Camera> findAllWithUsers();
 
 }

@@ -21,7 +21,7 @@ public class Camera {
     private int status;
     private String rentStatus;
     private LocalDate date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id" )
     @JsonBackReference
     private Users user;

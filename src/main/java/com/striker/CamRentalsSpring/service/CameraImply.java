@@ -45,8 +45,9 @@ public class CameraImply implements cameraInterf{
 
     @Override
     public List<Camera> retrieveCam() {
-        return cam_repo.findAll();
+        return cam_repo.findAllWithUsers();
     }
+
 
     @Override
     public Camera findCam(String serialNbr) {
