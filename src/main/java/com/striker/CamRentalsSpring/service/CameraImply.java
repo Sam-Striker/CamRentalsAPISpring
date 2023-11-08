@@ -2,6 +2,7 @@ package com.striker.CamRentalsSpring.service;
 
 import com.striker.CamRentalsSpring.modal.Camera;
 import com.striker.CamRentalsSpring.repository.Cam_repository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -45,7 +46,7 @@ public class CameraImply implements cameraInterf{
 
     @Override
     public List<Camera> retrieveCam() {
-        return cam_repo.findAllWithUsers();
+         return cam_repo.findAll();
     }
 
 

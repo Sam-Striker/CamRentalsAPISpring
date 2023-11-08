@@ -29,18 +29,18 @@ public class UserImply implements UserInterf{
         if (userDTO.getNationalID() == null || userDTO.getUsername() == null ||
                 userDTO.getPassword() == null || userDTO.getAddress() == null ||
                 userDTO.getPhone_nbr() == null) {
-            return new Response("All fields must be provided", false, "");
+            return new Response("All fields must be provided", false, "", null);
         }
         if (user_repo.existsByNationalID(userDTO.getNationalID())) {
-            return new Response("National ID already exists", false, "");
+            return new Response("National ID already exists", false, "", null);
         }
 
         if (!userDTO.getNationalID().matches("\\d+")) {
-            return new Response("National ID must contain only numbers", false, "");
+            return new Response("National ID must contain only numbers", false, "", null);
         }
 
         if (!userDTO.getPhone_nbr().matches("\\d+")) {
-            return new Response("Phone number must contain only numbers", false, "");
+            return new Response("Phone number must contain only numbers", false, "", null);
         }
 
         Users user = new Users();
@@ -58,7 +58,7 @@ public class UserImply implements UserInterf{
         Users savedUser = user_repo.save(user);
         String role = savedUser.getRole();
 
-        return new Response("User created successfully" , true, role);
+        return new Response("User created successfully" , true, role, null);
 
     }
 
@@ -73,15 +73,15 @@ public class UserImply implements UserInterf{
                 Optional<Users> user = user_repo.findByNationalIDAndPassword(loginDTO.getNationalID(), encodePassword);
                 if(user.isPresent()) {
                     String role = user1.getRole();
-                    return new Response("login successfully as " + role, true, role);
+                    return new Response("login successfully as " , true, role, user);
                 }else {
-                    return new Response("login failed", false, "");
+                    return new Response("login failed", false, "", null);
                 }
             } else {
-                return new Response("password not match", false, "");
+                return new Response("password not match", false, "", null);
             }
         } else {
-            return new Response("National Id Doesn't exist", false, "");
+            return new Response("National Id Doesn't exist", false, "", null);
         }
     }
 

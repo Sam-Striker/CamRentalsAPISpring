@@ -31,16 +31,8 @@ public class Users {
     private String phone_nbr;
     private LocalDate date;
     private String role;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-    @JsonManagedReference
-    private List<Camera> cameras;
 
-    public Users(int id) {
-        this.id = id;
-    }
 
-    public Users() {
-    }
 
 
 
