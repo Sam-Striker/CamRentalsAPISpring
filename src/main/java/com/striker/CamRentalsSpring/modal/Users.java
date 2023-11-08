@@ -20,9 +20,7 @@ public class Users {
     @NotBlank(message = "NationalID cannot be blank")
     @Pattern(regexp = "\\d+", message = "NationalID must contain only numbers")
     private String nationalID;
-    @NotBlank(message = "Username cannot be blank")
     private String username;
-    @NotBlank(message = "Password cannot be blank")
     private String password;
     @NotBlank(message = "Address cannot be blank")
     private String address;
