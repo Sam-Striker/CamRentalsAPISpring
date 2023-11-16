@@ -13,8 +13,6 @@ public interface User_repository extends JpaRepository<Users, Integer> {
     Users findByNationalID(String nationalID);
     boolean existsByNationalID(String nationalID);
 
-//    Roles findRoleByName(String roleName);
-//    Users getUserByNationalID(String nationalID);
 
 
 }
