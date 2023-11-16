@@ -21,7 +21,5 @@ public interface Cam_repository extends JpaRepository<Camera, Integer> {
     @Transactional
     void updateRentStatus(@Param("id") Integer id, @Param("newRentStatus") String newRentStatus);
 
-//    @Query("SELECT c FROM Camera c LEFT JOIN FETCH c.user")
-//    List<Camera> findAllWithUsers();
 
 }
