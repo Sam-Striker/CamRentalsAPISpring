@@ -17,7 +17,6 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(unique = true)
-    @NotBlank(message = "NationalID cannot be blank")
     @Pattern(regexp = "\\d+", message = "NationalID must contain only numbers")
     private String nationalID;
     private String username;
