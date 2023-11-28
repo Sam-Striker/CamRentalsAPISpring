@@ -1,12 +1,9 @@
 package com.striker.CamRentalsSpring.modal;
-
-import jakarta.validation.constraints.NotBlank;
+;
 import jakarta.validation.constraints.Pattern;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
-import java.util.List;
 @Getter
 @Setter
 @ToString
