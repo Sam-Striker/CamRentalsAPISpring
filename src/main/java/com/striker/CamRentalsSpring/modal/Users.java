@@ -22,7 +22,7 @@ public class Users {
     private String username;
     private String password;
     private String address;
-    @NotBlank(message = "Phone number cannot be blank")
+
     @Pattern(regexp = "\\d+", message = "Phone number must contain only numbers")
     private String phone_nbr;
     private LocalDate date;
